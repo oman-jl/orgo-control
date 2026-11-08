@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nanocloud Demo</title>
+  </head>
+  <body style="font-family:sans-serif;background:#0f172a;color:#e2e8f0;display:grid;place-items:center;height:100vh;margin:0">
+    <div style="text-align:center;padding:2rem;background:#1e293b;border-radius:1rem">
+      <h1>🐈 Nanocloud Demo</h1>
+      <p>Deployed from the Nanocloud control system.</p>
+      <p>Computer: <span id="host">…</span></p>
+      <p id="status">Checking API…</p>
+    </div>
+    <script>
+      fetch('/api/health').then(r=>r.json()).then(d=>{
+        document.getElementById('status').textContent = 'API OK — ' + JSON.stringify(d);
+        document.getElementById('host').textContent = d.hostname;
+      }).catch(e=>{
+        document.getElementById('status').textContent = 'API error: ' + e;
+      });
+    </script>
+  </body>
+</html>
